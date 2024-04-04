@@ -6,7 +6,7 @@ typedef void* data_type;
 
 typedef struct
 {
-    data_type *data;
+    data_type *data; //void** data
     int size;
     int allocated;
 } Vector;
@@ -21,13 +21,21 @@ void vector_push_back(Vector *v, data_type val);
 data_type vector_get(Vector *v, int i);
 
 // Atribui o valor val ao i-ésimo elemento do vetor
-void vector_set(Vector *v, int i, data_type val);
+data_type vector_set(Vector *v, int i, data_type val);
 
 // Retorna o tamanho do vetor
 int vector_size(Vector *v);
 
 // Retorna o indice do primeiro elemento com valor val. Retorna -1 se nao encontrado.
-int vector_find(Vector *v, data_type val);
+int vector_find(Vector *v, data_type val, int cmp_fn(data_type val1, data_type val2));
+
+data_type vector_max(Vector *v);
+
+data_type vector_min(Vector *v);
+
+int vector_argmax(Vector *v);
+
+int vector_argmin(Vector *v);
 
 // Remove o i-ésimo elemento do vetor.
 data_type vector_remove(Vector *v, int i);
@@ -45,10 +53,10 @@ void vector_insert(Vector *v, int i, data_type val);
 void vector_swap(Vector *v, int i, int j);
 
 // Ordena o vetor in-place (sem criar um novo vetor)
-void vector_sort(Vector *v);
+void vector_sort(Vector *v, int cmp_fn(data_type val1, data_type val2));
 
 // Retorna o indice de val usando busca binaria. Retorna -1 se nao encontrado.
-int vector_binary_search(Vector *v, data_type val);
+int vector_binary_search(Vector *v, data_type val, int cmp_fn(data_type val1, data_type val2));
 
 // Inverte o vetor in-place (sem criar um novo vetor)
 void vector_reverse(Vector *v);

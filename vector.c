@@ -44,15 +44,18 @@ data_type vector_get(Vector *v, int i){
 }
 
 // Atualiza o i-ésimo elemento do vector  para que ele passe a ter o valor val.
-void vector_set(Vector *v, int i, data_type val){
-    if(i>=0 && i < v->size)
-    v->data[i] = val;
+data_type vector_set(Vector *v, int i, data_type val){
+    if(i>=0 && i < v->size){
+        data_type previous = v->data[i];
+        v->data[i] = val;
+        return previous;
+    }
 }
 
 // Retorna o índice da primeira ocorrência do item no Vector ou -1 se o elemento não for encontrado.
-int vector_find(Vector *v, data_type val){
+int vector_find(Vector *v, data_type val, int cmp_fn(data_type val1, data_type val2)){
     for(int i=0; i<v->size; i++){
-        if(v->data[i] == val) return i;
+        if(cmp_fn(v->data[i],val)==0) return i;
     } return -1;
 }
 
@@ -151,12 +154,12 @@ void vector_swap(Vector *v, int i, int j){
 }
 
 // Ordena o vetor in-place (sem criar um novo vetor)
-void vector_sort(Vector *v){
+void vector_sort(Vector *v, int cmp_fn(data_type val1, data_type val2)){
     while(1){
         int nSwaps=0;
 
         for(int i=0; i < v->size-1; i++){
-            if(v->data[i]>v->data[i+1]){
+            if(cmp_fn(v->data[i],v->data[i+1])>0){
                 vector_swap(v,i,i+1);
                 nSwaps++;
             }
@@ -166,7 +169,7 @@ void vector_sort(Vector *v){
 }
 
 // Retorna o indice de val usando busca binaria. Retorna -1 se nao encontrado.
-int vector_binary_search(Vector *v, data_type val){
+int vector_binary_search(Vector *v, data_type val, int cmp_fn(data_type val1, data_type val2)){
     int minIdx=0, maxIdx = v->size-1;
 
     int medIdx;
@@ -174,8 +177,8 @@ int vector_binary_search(Vector *v, data_type val){
     {
         medIdx = (minIdx + maxIdx)/2;
 
-        if(v->data[medIdx] == val) return medIdx;
-        else if(val > v->data[medIdx]){
+        if(cmp_fn(val, v->data[medIdx])==0) return medIdx;
+        else if(cmp_fn(val, v->data[medIdx])==1){
             minIdx = medIdx+1;
         }
         else{

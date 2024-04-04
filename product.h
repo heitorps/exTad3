@@ -30,9 +30,9 @@ void product_print(Product *product);
 
 void product_destructor(Product *product);
 
-int product_compare_name(const void* produto1, const void* produto2);
+int product_compare_name(void* produto1, void* produto2);
 
-int product_compare_price(const void* produto1, const void* produto2);
+int product_compare_price(void* produto1, void* produto2);
 
-int product_compare_sales(const void* produto1, const void* produto2);
+int product_compare_sales(void* produto1, void* produto2);
 #endif

@@ -28,6 +28,8 @@ int main()
         vector_push_back(products, product);
     }
 
+    printf("LIDOS!!!\n");
+
     scanf("\n%c", &sort_option);
 
     if (sort_option == 'N')
