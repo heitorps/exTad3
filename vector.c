@@ -50,6 +50,7 @@ data_type vector_set(Vector *v, int i, data_type val){
         v->data[i] = val;
         return previous;
     }
+    return NULL;
 }
 
 // Retorna o índice da primeira ocorrência do item no Vector ou -1 se o elemento não for encontrado.

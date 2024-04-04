@@ -99,18 +99,15 @@ void product_destructor(Product *p){
 }
 
 int product_compare_name(void* produto1, void* produto2){
-    Product* p1 = *((Product**)produto1);
-    Product* p2 = *((Product**)produto2);
-
-    printf("VAIDAMERDA");
-    printf("%s || %s || TESTE\n",product_get_name(p1),product_get_name(p2));
+    Product *p1 = (Product *)produto1;
+    Product *p2 = (Product *)produto2;
 
     return strcmp(p1->name,p2->name);
 }
 
 int product_compare_price(void* produto1, void* produto2){
-    Product* p1 = *((Product**)produto1);
-    Product* p2 = *((Product**)produto2);
+    Product *p1 = (Product *)produto1;
+    Product *p2 = (Product *)produto2;
 
     if(p1->price > p2->price) return 1;
     if(p1->price < p2->price) return -1;
@@ -118,8 +115,8 @@ int product_compare_price(void* produto1, void* produto2){
 }
 
 int product_compare_sales(void* produto1, void* produto2){
-    Product* p1 = *((Product**)produto1);
-    Product* p2 = *((Product**)produto2);
+    Product *p1 = (Product *)produto1;
+    Product *p2 = (Product *)produto2;
 
     if(p1->sales > p2->sales) return 1;
     if(p1->sales < p2->sales) return -1;
